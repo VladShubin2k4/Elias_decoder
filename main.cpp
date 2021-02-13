@@ -1,17 +1,6 @@
-//#include <bits/stdc++.h>
-//#include <set>
-//#include <map>
 #include <vector>
 #include <string>
-//#include <algorithm>
-//#include <climits>
-//#include <cstdlib>
-//#include <cstring>
-//#include <cctype>
 #include <cmath>
-//#include <cstdio>
-//#include <iomanip>
-//#include <fstream>
 #include <iostream>
 #include <windows.h>
 using namespace std;
