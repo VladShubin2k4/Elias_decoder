@@ -97,7 +97,6 @@ int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
     freopen("res.txt","w",stdout);
-    cout<<"Enter Gamma Code:\n";
 
     short n, len;bool drop1st=false;string str;
     getline(cin,str);
