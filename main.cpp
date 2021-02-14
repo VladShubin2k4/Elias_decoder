@@ -46,8 +46,7 @@ void DeleteNull(string& str, short& len, bool& first){
             cnt=0;
         }else{
             ++len;
-            str.insert(i+1," ");
-            ++i;
+            str.insert(++i," ");
         }
     }
 }
@@ -73,25 +72,9 @@ vector<string> InDEC(string& str, short& len){
     return res;
 }
 
-int main(){
-    ios::sync_with_stdio(false);
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-    freopen("res.txt","w",stdout);
-    cout<<"Enter Gamma Code:\n";
-    short n, len;bool drop1st=false;
-    string str;
-    getline(cin,str);
-    len=str.size();n=str[0];if(n!=48) drop1st=true;
-    for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,len,i);
-    DeleteNull(str,len,drop1st);
-    vector <string> dec=InDEC(str,len);
-    if(drop1st) dec.pop_back();
-    short arg=static_cast<short>(drop1st);
-    Decompress(dec,arg);
-    string res;
+void Decode_and_Otput(vector<string>& dec){
+    string res,symb;
     for(short i=0; i<dec.size(); ++i) res+=dec[i];
-    string symb;
     short isfull=(res.size())%8;
     if(isfull){
         short cntnon=isfull;
@@ -103,11 +86,31 @@ int main(){
     for(short j=res.size()-isfull-1;j>=0;--j){
         symb+=res[j];
         if(symb.size()==8){
-            unsigned char symbol=transfer(stoi(symb),10);
+            unsigned char symbol=static_cast<unsigned char>(transfer(stoi(symb),10));
             symb.clear();
             cout<<symbol;
         }
     }
-    cout<<endl;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    SetConsoleCP(1251);SetConsoleOutputCP(1251);
+    freopen("res.txt","w",stdout);
+    cout<<"Enter Gamma Code:\n";
+
+    short n, len;bool drop1st=false;string str;
+    getline(cin,str);
+
+    len=str.size();n=str[0];if(n!=48) drop1st=true;
+    for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,len,i);
+    DeleteNull(str,len,drop1st);
+    vector <string> dec=InDEC(str,len);
+
+    if(drop1st) dec.pop_back();
+    short arg=static_cast<short>(drop1st);
+
+    Decompress(dec,arg);
+    Decode_and_Otput(dec);
     return 0;
 }
