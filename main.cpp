@@ -53,7 +53,7 @@ void DeleteNull(string& str, short& len, bool& first){
 
 vector<string> InDEC(string& str, short& len){
     vector<string> res;
-    int combo,p,iterator=0;
+    int combo,p;
     len=0;
     while(str[++len]!='\0'){}
     --len;
@@ -66,7 +66,6 @@ vector<string> InDEC(string& str, short& len){
                 ++p;
             }
             res.push_back(to_string(combo));
-            iterator++;
         }
     }
     return res;
