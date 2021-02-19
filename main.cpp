@@ -10,7 +10,7 @@ int transfer(int byte,short radix){
   int res=0, k=1;
   for(short i=0;byte!=0; ++i){
       res+=(byte%radix)*k;
-      k=k<<1;
+      k<<=1;
       byte/=radix;
   }
   return res;
