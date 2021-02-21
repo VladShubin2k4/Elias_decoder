@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-#include <cmath>
 #include <cstdlib>
 #include <iostream>
 #include <windows.h>
@@ -27,7 +26,7 @@ void Decompress(vector<string>& dec,short& arg){
         arg%=2;
         int cnt=stoi(dec[i]);
         dec[i].clear();
-        for(int j=0; j<cnt; ++j)  dec[i].insert(j,to_string(arg));
+        for(int j=0; j<cnt; ++j)  dec[i].push_back(static_cast<char>(arg+48));
         ++arg;
     }
 }
@@ -57,15 +56,11 @@ vector<string> InDEC(string& str, short& len){
     int combo,p;
     len=0;
     while(str[++len]!='\0'){}
-    --len;
-    for(short i=len; i>=0; --i){
+    for(short i=--len; i>=0; --i){
         if(str[i]==' '){
             combo=0;
             p=0;
-            for(short j=i-1; str[j]!=' ' && j>=0; --j){
-                combo=combo+(static_cast<int>(str[j])-48)*static_cast<int>(pow(2,p));
-                ++p;
-            }
+            for(short j=i-1; str[j]!=' ' && j>=0; --j) combo=combo+(static_cast<int>(str[j])-48)*static_cast<int>(1<<p++);
             res.push_back(to_string(combo));
         }
     }
