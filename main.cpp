@@ -56,7 +56,8 @@ vector<string> InDEC(string& str, short& len){
     int combo,p;
     len=0;
     while(str[++len]!='\0'){}
-    for(short i=--len; i>=0; --i){
+    --len;
+    for(short i=len; i>=0; --i){
         if(str[i]==' '){
             combo=0;
             p=0;
