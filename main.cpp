@@ -93,11 +93,11 @@ int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
     freopen("res.txt","w",stdout);
-    short n, len;bool drop1st=false;
+    short len;bool drop1st=false;
     string str;
     getline(cin,str);
 
-    len=str.size();n=str[0];if(n!=48) drop1st=true;
+    len=str.size();if(str[0]!=48) drop1st=true;
     for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,len,i);
     DeleteNull(str,len,drop1st);
     vector <string> dec=InDEC(str,len);
