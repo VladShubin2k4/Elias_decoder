@@ -97,7 +97,8 @@ int main(){
     string str;
     getline(cin,str);
 
-    len=str.size();if(str[0]!=48) drop1st=true;
+    len=static_cast<short>(str.size());
+    if(str[0]!=48) drop1st=true;
     for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,len,i);
     DeleteNull(str,len,drop1st);
     vector <string> dec=InDEC(str,len);
