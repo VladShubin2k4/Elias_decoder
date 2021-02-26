@@ -15,10 +15,9 @@ int transfer(int byte,short radix){
   return res;
 }
 
-void DeleteElem(string& str, short& len, short arg){
-    for (short i=arg; i<len-1; ++i) str[i]=str[i+1];
-    --len;
-    str[len]='\0';
+void DeleteElem(string& str, short arg){
+    for (short i=arg; i<str.size()-1; ++i) str[i]=str[i+1];
+    str.erase(str.size()-1,1);
 }
 
 void Decompress(vector<string>& dec,short& arg){
@@ -31,33 +30,27 @@ void Decompress(vector<string>& dec,short& arg){
     }
 }
 
-void DeleteNull(string& str, short& len, bool& first){
+void DeleteNull(string& str, bool& first){
     short cnt=0;
     if(!first) --cnt;
     for(short i=0; i<str.size() && str[i]!='\0'; ++i){
         if(str[i]=='0'){
             ++cnt;
-            DeleteElem(str, len, i);
-            --i;
+            DeleteElem(str, i--);
         }else if(cnt){
             i=i+cnt+1;
-            ++len;
             str.insert(i," ");
             cnt=0;
         }else{
-            ++len;
             str.insert(++i," ");
         }
     }
 }
 
-vector<string> InDEC(string& str, short& len){
+vector<string> InDEC(string& str){
     vector<string> res;
     int combo,p;
-    len=0;
-    while(str[++len]!='\0'){}
-    --len;
-    for(short i=len; i>=0; --i){
+    for(short i=str.size()-1; i>=0; --i){
         if(str[i]==' '){
             combo=0;
             p=0;
@@ -93,15 +86,14 @@ int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
     freopen("res.txt","w",stdout);
-    short len;bool drop1st=false;
+    bool drop1st=false;
     string str;
     getline(cin,str);
 
-    len=static_cast<short>(str.size());
     if(str[0]!=48) drop1st=true;
-    for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,len,i);
-    DeleteNull(str,len,drop1st);
-    vector <string> dec=InDEC(str,len);
+    for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,i);
+    DeleteNull(str,drop1st);
+    vector <string> dec=InDEC(str);
 
     if(drop1st) dec.pop_back();
     short arg=static_cast<short>(drop1st);
