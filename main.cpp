@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include <cstdlib>
+//#include <cstdlib>
 #include <iostream>
 #include <windows.h>
 using namespace std;
@@ -13,11 +13,6 @@ int transfer(int byte,short radix){
       byte/=radix;
   }
   return res;
-}
-
-void DeleteElem(string& str, short arg){
-    for (short i=arg; i<str.size()-1; ++i) str[i]=str[i+1];
-    str.erase(str.size()-1,1);
 }
 
 void Decompress(vector<string>& dec,short& arg){
@@ -36,7 +31,7 @@ void DeleteNull(string& str, bool& first){
     for(short i=0; i<str.size() && str[i]!='\0'; ++i){
         if(str[i]=='0'){
             ++cnt;
-            DeleteElem(str, i--);
+            str.erase(i--,1);
         }else if(cnt){
             i=i+cnt+1;
             str.insert(i," ");
@@ -85,13 +80,13 @@ void Decode_and_Otput(vector<string>& dec){
 int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
-    freopen("res.txt","w",stdout);
+    //freopen("res.txt","w",stdout);
     bool drop1st=false;
     string str;
     getline(cin,str);
 
     if(str[0]!=48) drop1st=true;
-    for(short i=0; i<str.size(); ++i) if(str[i]==' ') DeleteElem(str,i);
+    for(short i=0; i<str.size(); ++i) if(str[i]==' ') str.erase(i,1);
     DeleteNull(str,drop1st);
     vector <string> dec=InDEC(str);
 
