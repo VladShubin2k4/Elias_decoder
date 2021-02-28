@@ -36,9 +36,7 @@ void DeleteNull(string& str, bool& first){
             i=i+cnt+1;
             str.insert(i," ");
             cnt=0;
-        }else{
-            str.insert(++i," ");
-        }
+        }else str.insert(++i," ");
     }
 }
 
