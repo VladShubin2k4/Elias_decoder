@@ -25,7 +25,7 @@ void Decompress(vector<string>& dec,short& arg){
     }
 }
 
-void DeleteNull(string& str, bool& first){
+void DeleteNull(string& str, short& first){
     short cnt=0;
     if(!first) --cnt;
     for(short i=0; i<str.size() && str[i]!='\0'; ++i){
@@ -79,17 +79,15 @@ int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
     //freopen("res.txt","w",stdout);
-    bool drop1st=false;
+    short arg=0;
     string str;
     getline(cin,str);
 
-    if(str[0]!=48) drop1st=true;
+    if(str[0]==49){ arg=1; str.erase(0,1);}
     for(short i=0; i<str.size(); ++i) if(str[i]==' ') str.erase(i,1);
-    DeleteNull(str,drop1st);
-    vector <string> dec=InDEC(str);
 
-    if(drop1st) dec.pop_back();
-    short arg=static_cast<short>(drop1st);
+    DeleteNull(str,arg);
+    vector <string> dec=InDEC(str);
 
     Decompress(dec,arg);
     Decode_and_Otput(dec);
