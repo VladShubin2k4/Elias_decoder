@@ -25,9 +25,8 @@ void Decompress(vector<string>& dec,short& arg){
     }
 }
 
-void DeleteNull(string& str, short& first){
+void DeleteNull(string& str){
     short cnt=0;
-    if(!first) --cnt;
     for(short i=0; i<str.size() && str[i]!='\0'; ++i){
         if(str[i]=='0'){
             ++cnt;
@@ -83,10 +82,11 @@ int main(){
     string str;
     getline(cin,str);
 
-    if(str[0]==49){ arg=1; str.erase(0,1);}
+    arg=str[0]%48;
+    str.erase(0,1);
     for(short i=0; i<str.size(); ++i) if(str[i]==' ') str.erase(i,1);
 
-    DeleteNull(str,arg);
+    DeleteNull(str);
     vector <string> dec=InDEC(str);
 
     Decompress(dec,arg);
