@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-//#include <cstdlib>
 #include <iostream>
 #include <windows.h>
 using namespace std;
@@ -39,7 +38,7 @@ void DeleteNull(string& str){
     }
 }
 
-vector<string> InDEC(string& str){
+vector<string> InDEC(const string& str){
     vector<string> res;
     int combo,p;
     for(short i=str.size()-1; i>=0; --i){
@@ -53,7 +52,7 @@ vector<string> InDEC(string& str){
     return res;
 }
 
-void Decode_and_Otput(vector<string>& dec){
+void Decode_and_Otput(const vector<string>& dec){
     string res,symb;
     for(short i=0; i<dec.size(); ++i) res+=dec[i];
     short isfull=(res.size())%8;
@@ -77,7 +76,6 @@ void Decode_and_Otput(vector<string>& dec){
 int main(){
     ios::sync_with_stdio(false);
     SetConsoleCP(1251);SetConsoleOutputCP(1251);
-    //freopen("res.txt","w",stdout);
     short arg=0;
     string str;
     getline(cin,str);
@@ -91,5 +89,6 @@ int main(){
 
     Decompress(dec,arg);
     Decode_and_Otput(dec);
+    cin.get();cin.get();
     return 0;
 }
